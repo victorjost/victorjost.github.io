@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import portrait from '../assets/victor-jost.jpg';
 import { cv } from '../data/cv';
 import { site } from '../data/site';
 import { otherLang, type Lang } from '../i18n';
@@ -50,7 +52,10 @@ const Name = isHome ? 'h1' : 'p';
       <a class="monogram" href={href(lang, 'home')} aria-label={ui.nav.home}>VJ</a>
       <a class="lang" href={alternate} hreflang={other} lang={other} aria-label={ui.switchToAria}>{ui.switchTo}</a>
     </div>
-    <Name class="name in" style="--i:1">Victor<span>Jost</span></Name>
+    <div class="identity in" style="--i:1">
+      <Name class="name">Victor<span>Jost</span></Name>
+      <Image class="photo" src={portrait} alt={ui.portraitAlt} width={120} height={120} densities={[1, 2, 3]} loading="eager" />
+    </div>
     <p class="pitch in" style="--i:2">{site.pitch[lang]}</p>
     <span class="badge in" style="--i:3"><span class="dot" aria-hidden="true"></span>{site.availability[lang]}</span>
     <div class="actions in" style="--i:4">
@@ -85,9 +90,14 @@ const Name = isHome ? 'h1' : 'p';
   }
   .side-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
   .monogram { width: 48px; height: 48px; background: var(--brand); color: var(--on-brand); display: grid; place-items: center; font-weight: 800; font-size: 18px; text-decoration: none; }
+
+  /* Photo carrée à droite du nom, de la hauteur de ses deux lignes : pas d'arrondi ni d'ombre */
+  /* Le nom reste aligné à gauche, la photo s'aligne à droite sur le bouton de langue */
+  .identity { margin-top: var(--space-6); display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+  .photo { display: block; width: 120px; height: 120px; object-fit: cover; background: var(--paper); outline: 1px solid var(--ink-line); flex-shrink: 0; }
   .lang { font-size: 13px; font-weight: 700; color: var(--ink-text); text-decoration: none; border: 1px solid var(--ink-line); border-radius: var(--radius-sm); padding: 4px 10px; }
   .lang:hover { color: var(--surface); border-color: var(--ink-soft); }
-  .name { margin: var(--space-6) 0 0; font-size: 64px; line-height: .95; font-weight: 800; letter-spacing: -.03em; }
+  .name { margin: 0; font-size: 64px; line-height: .95; font-weight: 800; letter-spacing: -.03em; }
   .name span { display: block; color: var(--brand-light); }
   .pitch { margin: var(--space-4) 0 0; max-width: 36ch; color: var(--ink-text); font-size: 17px; line-height: 26px; }
   .badge { margin-top: var(--space-6); display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; font-size: 14px; font-weight: 500; color: var(--surface); border: 1px solid var(--ink-line); padding: 6px 12px; border-radius: var(--radius-sm); }
@@ -111,6 +121,7 @@ const Name = isHome ? 'h1' : 'p';
   @media (max-width: 960px) {
     .side-inner { position: static; height: auto; overflow: visible; max-width: none; margin: 0; padding: 48px 24px; }
     .name { font-size: 52px; }
+    .photo { width: 96px; height: 96px; }
     .toc { margin-top: var(--space-6); }
     .toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-4); }
     .toc a::before { width: 12px; }

@@ -4,6 +4,7 @@ import type { Lang } from '.';
 const fr = {
   switchTo: 'English',
   switchToAria: 'Read this page in English',
+  portraitAlt: 'Portrait de Victor Jost',
   nav: {
     label: 'Sommaire',
     home: 'Accueil',
@@ -89,6 +90,7 @@ const fr = {
 const en: typeof fr = {
   switchTo: 'Français',
   switchToAria: 'Lire cette page en français',
+  portraitAlt: 'Portrait of Victor Jost',
   nav: {
     label: 'Contents',
     home: 'Home',
